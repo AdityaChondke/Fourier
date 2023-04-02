@@ -2,10 +2,24 @@ let time = 0;
 let wave =[];
 
 let slider;
+let func = 'sin';
 
 function setup() {
     createCanvas(600, 400);
     slider = createSlider(1, 100, 1);
+    
+    createButton('sin').mousePressed(() => {
+        func = 'sin';
+    });
+    createButton('cos').mousePressed(() => {
+        func = 'cos';
+    });
+    createButton('noise').mousePressed(() => {
+        func = 'noise';
+    });
+    createButton('tan').mousePressed(() => {    
+        func = 'tan';
+    });
 }
 
 function draw() {
@@ -19,8 +33,23 @@ function draw() {
     let prevy = y;
     let n = i * 2 + 1;
     let radius = 75 * (4 / (n * PI) );
-    x += radius * cos(n * time);
-    y += radius * sin(n * time);
+    if ( func === 'cos') {
+        x += radius * sin(n * time);
+        y += radius * cos(n * time);
+    }
+    if ( func ==='sin') {
+        x += radius * cos(n * time);
+        y += radius * sin(n * time);
+    }
+    if ( func === 'tan') {
+        x += radius * tan(n * time);
+        y += radius * tan(n * time);
+    }
+    if ( func === 'noise') {
+        x += radius * noise(n * time);
+        y += radius * noise(n * time);
+    }
+
 
     stroke(255, 100);
     noFill();
